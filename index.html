@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Guess My Number!</title>
+
+    <script type="text/javascript" src="prolog.js"></script>
+    <script type="text/prolog" id="guess.pl">
+        :- use_module(library(random)).
+         genNumber(X,Y) :- X is Y. len([],0 ).
+          len([_|T],N) :- len(T,X), N is X+1.
+           solve(X,Y, equal) :-getChosen(LX), len(LX, N), X=:=Y .
+            solve(X,Y, lost) :- getChosen(LX), len(LX, N), N>=4.
+             getChosen(L) :- findall(X, chosen(X), L).
+              solve(X,Y, lower) :- getChosen(LX), len(LX, N), N < 4, X> Y.
+               solve(X,Y, greater) :- getChosen(LX), len(LX, N),N < 4, X < Y. 
+               </script>
+</head>
+
+
+<body>
+    <header>
+        <h1>Guess My Number!</h1>
+        <p class="between">(Between 1 and 20)</p>
+        <button class="btn again">Again!</button>
+        <div class="number">?</div>
+    </header>
+    <main>
+        <section class="left">
+            <input type="number" class="guess" />
+            <button id="btn" class="btn check">Check!</button>
+        </section>
+        <section class="left">
+            <p class="label-score"> Score: <span class="score">20</span></p>
+            <p class="message">Start guessing...</p>
+        </section>
+        <section class="left">
+            <input type="number" class="inputNum" />
+            <button id="gen" class="btn rand">gen!</button>
+        </section>
+
+    </main>
+    <section class="right">
+
+
+        <p class="label-highscore">
+            Your moves <span id="moves"></span>
+        </p>
+
+    </section>
+    <script src="script.js"></script>
+    <script>
+    </script>
+</body>
+
+</html>
